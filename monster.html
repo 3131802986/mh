@@ -1,0 +1,359 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <style>
+        table {
+            width: 100%;
+            height: 700px;
+            border-collapse: collapse;
+        }
+
+        .top {
+            background-color: rgb(58, 139, 255);
+            color: white;
+            font-size: 40px;
+            text-align: center;
+        }
+
+        .retrun {
+            position: relative;
+            top: 5%;
+            right: 40%;
+            width: 40px;
+            height: 40px;
+        }
+
+        .img_return {
+            width: 40px;
+            height: 40px;
+        }
+
+            .img_return:hover {
+                opacity: 0.8;
+            }
+
+        .body {
+            background-color: rgb(216,234,255);
+            text-align: center;
+            align-items: center;
+
+        }
+        .slecet{
+            background-color:aliceblue;
+            text-align:left;
+            
+        }
+        .option {
+            display:inline-block;
+            color: darkgrey;
+            font-size: 15px;
+            margin-top:0px;
+            margin-left: 10px;
+            user-select: none;
+        }
+        .monsterContainer{
+            display:block;
+            margin-left:5%;
+            background-color:snow;
+            text-align:left;
+            width:90%;
+            height:450px;
+        }
+        .monster{
+            display:inline-block;
+            width:100Px;
+            height:120px;
+            background-color:white;
+            margin-top:40px;
+            margin-left:40px;
+            text-align:center;
+        }
+        .monster_img{
+            display:block;
+            width:90px;
+            height:110px;
+            margin-top:5px;
+            margin-right:5px;
+            margin-left:5px;
+        }
+        .monster_name{
+            margin-top:10px;
+            font-size:15px;
+        }
+        .pageNumberContainer{
+            position:relative;
+            background-color:aliceblue;
+            width:400px;
+            height:40px;
+            margin-top:10px;
+            right:-35%;
+        } 
+        .pageNumber{
+            margin-top:10px;
+            display:inline-block;
+            font-size:20px;
+            color:darkgrey;
+            user-select:none;
+        }
+        .searchbox{
+            width:100px;
+            height:15px;
+            margin-left:600px;
+            resize:none;
+        }
+    </style>
+    <script>
+        
+        var maxCountPer = 18;
+        var monsterData = [
+            { id: "飞龙种", name: "雄火龙" },
+            { id: "飞龙种", name: "苍火龙" },
+            { id: "兽龙种", name: "爆锤龙" },
+            { id: "飞龙种", name: "爆鳞龙" },
+            { id: "古龙种", name: "贝希摩斯" },
+            { id: "牙龙种", name: "痹贼龙" },
+            { id: "兽龙种", name: "惨爪龙" },
+            { id: "飞龙种", name: "雌火龙" },
+            { id: "飞龙种", name: "毒妖鸟" },
+            { id: "环境生物", name: "芳翼龙" },
+            { id: "牙龙种", name: "飞雷龙" },
+            { id: "飞龙种", name: "风飘龙" },
+            { id: "飞龙种", name: "浮空龙" },
+            { id: "兽龙种", name: "骨锤龙" },
+            { id: "兽龙种", name: "冠突龙" },
+            { id: "飞龙种", name: "黑角龙" },
+            { id: "飞龙种", name: "角龙" },
+            { id: "环境生物", name: "精灵鹿" },
+            { id: "环境生物", name: "巨峰" },
+            { id: "环境生物", name: "巨甲虫" },
+            { id: "环境生物", name: "菌猪" },
+            { id: "兽龙种", name: "蛮颚龙" },
+            { id: "牙龙种", name: "猫蜥龙" },
+            { id: "古龙种", name: "冥灯龙" },
+            { id: "鱼龙种", name: "泥鱼龙" },
+            { id: "环境生物", name: "奇面族" },
+            { id: "古龙种", name: "麒麟" },
+            { id: "古龙种", name: "熔山龙" },
+            { id: "鱼龙种", name: "熔岩龙" },
+            { id: "鸟龙种", name: "骚鸟" },
+            { id: "飞龙种", name: "霜翼风飘龙" },
+            { id: "飞龙种", name: "迅龙" },
+            { id: "兽龙种", name: "沙漠食草龙" },
+            { id: "古龙种", name: "尸套龙" },
+            { id: "兽龙种", name: "食草龙" },
+            { id: "环境生物", name: "酸翼龙" },
+            { id: "兽龙种", name: "突击龙" },
+            { id: "兽龙种", name: "土砂龙" },
+            { id: "古龙种", name: "雾瘴尸套龙" },
+            { id: "古龙种", name: "冰咒龙" },
+            { id: "古龙种", name: "天地煌啼龙" },
+            { id: "古龙种", name: "歼世灭尽龙" },
+            { id: "古龙种", name: "溟波龙" },
+            { id: "鸟龙种", name: "黑狼鸟" },
+            { id: "鸟龙种", name: "战痕黑狼鸟" },
+            { id: "鸟龙种", name: "水妖鸟" },
+            { id: "？？？", name: "未知" },
+            { id: "环境生物", name: "响翼龙" },
+            { id: "牙龙种", name: "小痹贼龙" },
+            { id: "环境生物", name: "行翼龙" },
+            { id: "牙龙种", name: "凶豺龙" },
+            { id: "古龙种", name: "绚辉龙" },
+            { id: "鸟龙种", name: "眩鸟" },
+            { id: "牙龙种", name: "痹毒龙" },
+            { id: "牙龙种", name: "雷狼龙" },
+            { id: "兽龙种", name: "惶恐恐暴龙" },
+            { id: "兽龙种", name: "雷颚龙" },
+            { id: "兽龙种", name: "猛牛龙" },
+            { id: "兽龙种", name: "斩龙" },
+            { id: "兽龙种", name: "硫斩龙" },
+            { id: "兽龙种", name: "碎龙" },
+            { id: "飞龙种", name: "冰牙龙" },
+            { id: "飞龙种", name: "浮眠龙" },
+            { id: "飞龙种", name: "轰龙" },
+            { id: "飞龙种", name: "黑轰龙" },
+            { id: "兽龙种", name: "岩贼龙" },
+            { id: "古龙种", name: "炎妃龙" },
+            { id: "环境生物", name: "咬鱼" },
+            { id: "飞龙种", name: "红莲爆鳞龙" },
+            { id: "飞龙种", name: "金火龙" },
+            { id: "飞龙种", name: "银火龙" },
+            { id: "飞龙种", name: "樱火龙" },
+            { id: "牙龙种", name: "贼龙" },
+            { id: "牙龙种", name: "凶爪龙" },
+            { id: "兽龙种", name: "恐暴龙" },
+            { id: "飞龙种", name: "千刃龙" },
+            { id: "兽龙种", name: "雷狼龙" },
+            { id: "牙兽种", name: "金狮子" },
+            { id: "飞龙种", name: "冰牙龙" },
+            { id: "兽龙种", name: "尾锤龙" },
+            { id: "飞龙种", name: "电龙" },
+            { id: "鱼龙种", name: "冰鱼龙" },
+            { id: "？？？", name: "黑龙" },
+            { id: "？？？", name: "煌黑龙" },
+            { id: "古龙种", name: "钢龙" },
+            { id: "古龙种", name: "灭尽龙" },
+            { id: "古龙种", name: "炎王龙" },
+        ]
+        // 初始化当前的怪物数据
+        currentMonsterData = [{ id: "", name: "" }];
+
+        function optionOnclick(option) {
+
+            var monstercontainer = document.getElementById("monsterContainer");
+            monstercontainer.innerHTML = "";
+            var pageNumberContainer = document.getElementById("pageNumberContainer");
+            pageNumberContainer.innerHTML = "";
+
+            var options = document.getElementsByClassName("option");
+            for (var i = 0; i < options.length; i++) {
+                if (options[i].getAttribute("data-selected") === "true") {
+                    options[i].style.color = "darkgrey";
+                    options[i].setAttribute("data-selected", "false");
+                }
+            }             
+            if (option.getAttribute('data-selected') == 'false') {
+                option.style.color = 'rgb(58,139,255)';
+                option.setAttribute('data-selected', 'true');
+            }
+            else {
+                option.style.color = 'darkgrey';
+                option.setAttribute('data-selected', 'false');
+            }
+            var isAll = false;
+            if (option.textContent == "全部") {
+                isAll = true;
+            }
+            //清空当前的怪物
+            // 初始化当前的怪物数据
+            currentMonsterData = [];
+            var t = 0;
+            for (var i = 0; i < monsterData.length; i++) {
+
+                if (monsterData[i].id== option.textContent || isAll) {
+                    currentMonsterData.push({ id: monsterData[i].id, name: monsterData[i].name });                                       
+                    t++;
+                }              
+            }
+             //生成页码选项
+            var pageCount = Math.ceil(currentMonsterData.length / maxCountPer);
+            var pageNumberContainer = document.getElementById("pageNumberContainer");
+            pageNumberContainer.innerHTML = "";
+            for (var i = 1; i <= pageCount; i++) {
+
+                var pageNumber = document.createElement("div");
+                pageNumber.className = "pageNumber";
+                pageNumber.textContent = i;
+                pageNumber.addEventListener("click", skipPage);
+                if (i == 1) {
+                    pageNumber.style.color = "blue";
+                }
+                pageNumberContainer.appendChild(pageNumber);
+            }
+
+            loadMonster(1);
+        }
+        function loadMonster(page) { 
+
+            var startIndex = (page - 1) * maxCountPer;           
+            
+            var monstercontainer = document.getElementById("monsterContainer");
+            
+            monstercontainer.innerHTML = "";
+            
+            var count = 0;
+            for (var x = startIndex; count< maxCountPer && x < currentMonsterData.length; x++) {
+
+                var monster = document.createElement("div");
+                monster.className = "monster";
+                monster.setAttribute("data-id", currentMonsterData[x].id);
+                var monster_img = document.createElement("img");
+                monster_img.className = "monster_img";
+                monster_img.src = "怪物图标/" + currentMonsterData[x].name + ".PNG";
+                var monster_name = document.createElement("div");
+                monster_name.className = "monster_name";
+                monster_name.textContent = currentMonsterData[x].name;
+
+                monster.appendChild(monster_img);
+                monster.appendChild(monster_name);
+                monstercontainer.appendChild(monster);
+                count++;
+            }
+           
+            
+            
+            
+            
+        } 
+        function skipPage() {
+            this.style.color = "blue";
+            var pageNumber = parseInt(this.textContent);
+            var pageNumbers = document.getElementsByClassName("pageNumber");
+            for (var i = 0; i < pageNumbers.length; i++) {
+                if (pageNumbers[i] != this) {
+                    pageNumbers[i].style.color = "darkgrey";
+                }
+            }
+            loadMonster(pageNumber);
+           
+        }
+        function search() {
+            var textArea = document.getElementsByClassName("searchbox")[0];
+            var name = textArea.value;
+            var newData = [];
+            
+            for (var i = 0; i < currentMonsterData.length; i++) {
+                if (currentMonsterData[i].name.includes(name)) { 
+                    
+                    newData.push({ id: currentMonsterData[i].id, name: currentMonsterData[i].name });
+                }
+            }
+            currentMonsterData = newData;
+                         
+            loadMonster(1);
+        }
+        window.onload = function () {        
+            var element = document.getElementsByClassName("option")[0];
+            optionOnclick(element);           
+        };
+    </script>
+</head>
+<body>
+    <table>
+        <thead>
+            <tr>
+                <td class="top" height="40"><a class="retrun" href="index.html"><img class="img_return" src="return.png" /></a>怪物图鉴</td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="slecet" height="100">
+                    <div class="option" onclick="optionOnclick(this)" data-selected="false">全部</div>
+                    <div class="option" onclick="optionOnclick(this)" data-selected="false">环境生物</div>
+                    <div class="option" onclick="optionOnclick(this)" data-selected="false">飞龙种</div>
+                    <div class="option" onclick="optionOnclick(this)" data-selected="false">兽龙种</div>
+                    <div class="option" onclick="optionOnclick(this)" data-selected="false">鱼龙种</div>
+                    <div class="option" onclick="optionOnclick(this)" data-selected="false">牙兽种</div>
+                    <div class="option" onclick="optionOnclick(this)" data-selected="false">牙龙种</div>
+                    <div class="option" onclick="optionOnclick(this)" data-selected="false">鸟龙种</div>
+                    <div class="option" onclick="optionOnclick(this)" data-selected="false">古龙种</div>
+                    <div class="option" onclick="optionOnclick(this)" data-selected="false">？？？</div>
+                    <textarea class="searchbox" ></textarea>
+                    <button style="position:relative; height:20px;width:60px;top:-2%;margin-left:0px" onclick="search()">搜索</button>
+                </td>
+            </tr>
+            <tr>
+                <td class="body" height="560">
+                    <div class="monsterContainer" id="monsterContainer">  
+                        
+                    </div>  
+                    <div class="pageNumberContainer" id="pageNumberContainer">                       
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>

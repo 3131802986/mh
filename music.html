@@ -1,0 +1,224 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <style>
+        table {
+            width: 100%;
+            height: 700px;
+            border-collapse: collapse;
+        }
+
+        .top {
+            background-color: rgb(58, 139, 255);
+            color: white;
+            font-size: 40px;
+            text-align: center;
+        }
+
+        .left {
+        }
+
+        .body {
+            background-color: rgb(216,234,255);
+        }
+
+        .retrun {
+            position: relative;
+            top: 5%;
+            right: 40%;
+            width: 40px;
+            height: 40px;
+        }
+
+        .content-container {
+            display: flex;
+            text-align: center;
+        }
+
+        .img_return {
+            width: 40px;
+            height: 40px;
+        }
+
+            .img_return:hover {
+                opacity: 0.8;
+            }
+        .musicsContainer{
+            display:block;
+            overflow-y:scroll;
+            width:90%;
+            height:90%;
+            margin-top:5%;
+            margin-left:5%;
+            background-color:azure;
+        }
+        .serachBox {
+            position: absolute;
+            display: inline-block;
+            width: 10%;
+            height: 25px;
+            top: 10%;
+            right:10%;
+
+        }
+        .serachBoxButton {
+            display: inline-block;
+            position: absolute;
+            width: 5%;
+            height: 25px;
+            top: 10.5%;
+            right: 5%;
+            background-color: rgb(58,139,235);
+            color:white;
+            text-align:center;
+            user-select:none;
+        }
+            .serachBoxButton:hover {
+                background-color: rgb(54, 121, 218);
+            }
+        .musicbox{
+            display:flex;
+            margin-left:2.5%;
+            background-color:rgb(240 240 250);
+            width:95%;
+            height:60px;
+            margin-top:10px;
+        }
+        
+        .audio_music{
+            display:inline-block;
+            width:600px;
+            margin-left:55%;
+            right:10%;
+           
+        }
+        .musicName{
+            display:inline-block;
+            font-size:18px;
+            margin-left:10px;
+            width:50%;
+            height:80%;
+            margin-top:1%;
+            margin-left:5%;
+        }
+       
+        
+    </style>
+    <script>
+
+        const musics = [{ name: "英雄之证", src: "音乐/英雄之证.mp3" },         
+            { name: "裏谷玲央 - 妖艶なる舞 ～ タマミツネ（泡狐龙主题曲）", src: "音乐/裏谷玲央 - 妖艶なる舞 ～ タマミツネ.mp3" },
+            { name: "裏谷玲央 - 銀翼の凶星 〜 バルファルク（天彗龙主题曲）", src: "音乐/裏谷玲央 - 銀翼の凶星 〜 バルファルク.mp3" },
+            { name: "裏谷玲央 - 灼熱の刃 ~ ディノバルド（斩龙主题曲）", src: "音乐/裏谷玲央 - 灼熱の刃 ~ ディノバルド.mp3" },
+            { name: "裏谷玲央,竹岡智行 - 凛然なる勇姿", src: "音乐/裏谷玲央,竹岡智行 - 凛然なる勇姿.mp3" },
+            { name: "牧野忠義 - 剛き紺藍／ブラキディオス： World version", src: "音乐/牧野忠義 - 剛き紺藍／ブラキディオス： World version.mp3" },
+            { name: "牧野忠義 - 名もなき狩人の矜持", src: "音乐/牧野忠義 - 名もなき狩人の矜持.mp3" },
+            { name: "小見山優子 - 壮麗纏いし銀盤の貴人／イヴェルカーナ（冰咒龙主题曲）", src: "音乐/小見山優子 - 壮麗纏いし銀盤の貴人／イヴェルカーナ.mp3" },
+            { name: "甲田雅人 - 祖なる龍（祖龙主题曲）", src: "音乐/甲田雅人 - 祖なる龍.mp3" },
+            { name: "堀諭史 - Sunbreak", src: "音乐/堀諭史 - Sunbreak.mp3" },
+            { name: "堀諭史 - 百竜ノ淵源（雷神龙主题曲）", src: "音乐/堀諭史 - 百竜ノ淵源.mp3" },
+            { name: "裏谷玲央 - 嵐の中に燃える命（岚龙二阶段主题曲）", src: "音乐/裏谷玲央 - 嵐の中に燃える命.mp3" },
+            { name: "鈴木まり香 - 光と闇の転生~シャガルマガラ（天迴龙主题曲）", src: "音乐/鈴木まり香 - 光と闇の転生~シャガルマガラ.mp3" },
+            { name: "牧野忠義 - 閃烈なる蒼光／ジンオウガ（雷狼龙主题曲）", src: "音乐/牧野忠義 - 閃烈なる蒼光／ジンオウガ.mp3" },
+            { name: "牧野忠義 - 炎国の王妃／テオ・テスカトル： World version（炎妃龙主题曲）", src: "音乐/牧野忠義 - 炎国の王妃／テオ・テスカトル： World version.mp3" },
+            { name: "小見山優子 - 生命ある者へ", src: "音乐/小見山優子 - 生命ある者へ.mp3" },
+            { name: "小見山優子 - 月震／ナバルデウス（大海龙主题曲）", src: "音乐/小見山優子 - 月震／ナバルデウス.mp3" },
+            { name: "成田暁彦 - 明日を夢見て ～ 一等マイハウス", src: "音乐/成田暁彦 - 明日を夢見て ～ 一等マイハウス.mp3" },
+            { name: "成田暁彦 - 溟流を駆る暁の明星／ネロミェール", src: "音乐/成田暁彦 - 溟流を駆る暁の明星／ネロミェール.mp3" },
+            { name: "堀諭史 - 禍群の息吹：ロック ver", src: "音乐/堀諭史 - 禍群の息吹：ロック ver.mp3" },
+            { name: "裏谷玲央 - 不動の山神 ~ ガムート（老山龙主题曲）", src: "音乐/裏谷玲央 - 不動の山神 ~ ガムート.mp3" },
+            { name: "裏谷玲央 - 大風に羽衣の舞う（岚龙主题曲）", src: "音乐/裏谷玲央 - 大風に羽衣の舞う.mp3" },
+            { name: "裏谷玲央 - 電の反逆者 〜 ライゼクス（电龙主题曲）", src: "音乐/裏谷玲央 - 電の反逆者 〜 ライゼクス.mp3" },
+            { name: "裏谷玲央 - 奈落の妖星（骸龙主题曲）", src: "音乐/裏谷玲央 - 奈落の妖星.mp3" },
+            { name: "小見山優子 - 健啖の悪魔／イビルジョー： World version", src: "音乐/小見山優子 - 健啖の悪魔／イビルジョー： World version.mp3" },
+        ]
+        var currentMusics = [{ name: "", src: "" }];
+
+        function loadMusic(isAll, targetName) {
+            var musicsContanier = document.getElementById("msContainer");
+            musicsContanier.innerHTML = "";
+            currentMusics = [];
+            
+            if (isAll) {
+                currentMusics = musics;
+            }
+            else {
+                for (var i = 0; i < musics.length; i++) {
+                    if (musics[i].name.includes(targetName)) {
+                        currentMusics.push({ name: musics[i].name, src: musics[i].src });
+                    }
+                }
+            }
+            for (var i = 0; i < currentMusics.length; i++) {
+                var musicBox = document.createElement("div");
+                musicBox.className = "musicbox";
+                var musicName = document.createElement("div");
+                musicName.className = "musicName";
+                musicName.textContent = currentMusics[i].name;
+                var musicAudio = document.createElement("audio");
+                musicAudio.className = "audio_music";
+                musicAudio.src = currentMusics[i].src;
+                musicAudio.controls = true;
+                musicAudio.volume = 0.1;
+                musicBox.appendChild(musicName);
+                musicBox.appendChild(musicAudio);
+                musicsContanier.appendChild(musicBox);
+            }
+            
+        }
+
+        function audioPlay(thisAudio) {           
+            var audios = document.getElementsByClassName("audio_music");            
+            for (var i = 0; i < audios.length; i++) {              
+                if (audios[i]!=thisAudio) { 
+                    audios[i].pause();
+                }              
+            }         
+        }
+
+        function searchMusic() {
+            var seacrhbox = document.getElementById("targetName");
+            loadMusic(false, seacrhbox.value);
+            setOnly();
+        }
+
+        function setOnly() {
+            var audios = document.getElementsByClassName("audio_music");           
+            for (var i = 0; i < audios.length; i++) {
+                audios[i].addEventListener("play", function () {
+                    var thisAudio = this;
+                    audioPlay(thisAudio);
+                });
+            };
+        }
+
+        window.onload = function () {
+            
+            loadMusic(true,"");
+            setOnly();
+        };
+    </script>
+</head>
+<body>
+    <table>
+        <thead>
+            <tr>
+                <td class="top" height="40" ><a class="retrun" href="index.html"><img class="img_return" src="return.png" /></a>音乐鉴赏</td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="body" height="660">
+                    <textarea class="serachBox" id="targetName"></textarea>
+                    <div class="serachBoxButton" onclick="searchMusic()">搜索</div>
+                    <div class="musicsContainer" id="msContainer">                                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>

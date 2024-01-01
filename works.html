@@ -1,0 +1,202 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <style>
+        table {
+            width: 1450px;
+            height: 700px;
+            border-collapse: collapse;
+        }
+
+        .top {
+            background-color: rgb(40,40,45);
+            color: white;
+            font-size: 40px;
+            text-align: center;
+        }
+
+        .retrun {
+            position: relative;
+            top: 5%;
+            right: 40%;
+            width: 40px;
+            height: 40px;
+        }
+
+        .img_return {
+            width: 40px;
+            height: 40px;
+        }
+
+            .img_return:hover {
+                opacity: 0.8;
+            }
+
+        .body {
+            background-color: rgb(40,40,45);
+            max-width: 1450px;
+            text-align: center;
+            align-items: center;
+            overflow: hidden;
+            overflow-x: auto; /* 允许水平滚动 */
+            white-space: nowrap; /* 防止内容换行 */
+            max-height: 680px; /* 限制最大高度 */
+        }
+        .cover{
+            
+            width:1450px;
+            height:680px;           
+        }
+        .covercontainer {
+            position:relative;
+            display: inline-block;
+            overflow: hidden;
+            width: 200px;
+            flex-shrink: 0;
+            height: 680px;
+            background-color: blue;
+            float: left;
+            margin-left: 40px;
+            top:0;
+            right:0;
+
+            
+        }
+        .covercontainer_unfold{
+            animation:unfold 0.5s forwards;
+        }
+        .covercontainer_fold{
+            animation:fold 0.5s forwards;
+        }
+        .scorll{
+            display:flex;
+            width:100%;        
+            
+
+        }
+        .scorll_animation {
+            animation-name: move;
+            animation-duration: 15s;
+            animation-iteration-count: infinite;
+            animation-timing-function: linear;
+            animation-fill-mode: both;
+        }
+
+        @keyframes move{
+            from{
+                transform:translateX(0px);
+            }
+            to{
+                transform:translateX(-1450px);
+            }
+        }
+        @keyframes fold{
+            from{
+                width:1450px;
+            }
+            to{
+                width:100px;
+            }
+        }
+
+        @keyframes unfold{
+            from{
+                width:100px;
+            }
+            to{
+                width:1450px;
+            }
+        }
+
+    </style>
+    <script>
+        function coverOnclick(cover) {
+            var scorll = document.getElementById("scorll");
+
+            var covers = document.getElementsByClassName("covercontainer");
+            if (cover.getAttribute("data-selected") === "true") {
+                cover.classList.add("covercontainer_fold");
+                cover.classList.remove("covercontainer_unfold")
+                cover.setAttribute("data-selected", "false");
+                for (var i = 0; i < covers.length; i++) {
+                    if (covers[i] != this)
+                        covers[i].style.display = "inline-block";
+                }
+                cover.style.position = "relative";
+                cover.style.top = "0%";
+                cover.style.right = "0%";
+                scorll.classList.add("scorll_animation");
+                scorll.style.animationPlayState = 'running';
+            }
+            else {
+
+                cover.classList.add("covercontainer_unfold");
+                cover.classList.remove("covercontainer_fold");
+                cover.setAttribute("data-selected", "true");
+                for (var i = 0; i < covers.length; i++) {
+                    if (covers[i] != cover)
+                        covers[i].style.display = "none";
+                }
+                
+                scorll.style.animationPlayState = 'paused';
+                scorll.classList.remove("scorll_animation");
+                cover.style.position = "absolute";
+                cover.style.top = "8%";
+                cover.style.right = "1%";
+            }
+        }
+
+       
+    </script>
+</head>
+<body>
+    <table>
+        <thead>
+            <tr>
+                <td class="top" height="20"><a class="retrun" href="index.html"><img class="img_return" src="return.png" /></a>历代作品</td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="body" height="680">
+                    <div class="scorll  scorll_animation"  id="scorll">
+                        <div class="covercontainer" onclick="coverOnclick(this)" data-selector="false"><img class="cover" src="作品封面/4k1.png" /></div>
+                        <div class="covercontainer" onclick="coverOnclick(this)" data-selector="false"><img class="cover" src="作品封面/g.png" /></div>
+                        <div class="covercontainer" onclick="coverOnclick(this)" data-selector="false"><img class="cover" src="作品封面/p.png" /></div>
+                        <div class="covercontainer" onclick="coverOnclick(this)" data-selector="false"><img class="cover" src="作品封面/2.png" /></div>
+                        <div class="covercontainer" onclick="coverOnclick(this)" data-selector="false"><img class="cover" src="作品封面/p2.png" /></div>
+                        <div class="covercontainer" onclick="coverOnclick(this)" data-selector="false"><img class="cover" src="作品封面/p2g.png" /></div>
+                        <div class="covercontainer" onclick="coverOnclick(this)" data-selector="false"><img class="cover" src="作品封面/3.png" /></div>
+                        <div class="covercontainer" onclick="coverOnclick(this)" data-selector="false"><img class="cover" src="作品封面/p3.png" /></div>
+                        <div class="covercontainer" onclick="coverOnclick(this)" data-selector="false"><img class="cover" src="作品封面/3g.png" /></div>
+                        <div class="covercontainer" onclick="coverOnclick(this)" data-selector="false"><img class="cover" src="作品封面/4.png" /></div>
+                        <div class="covercontainer" onclick="coverOnclick(this)" data-selector="false"><img class="cover" src="作品封面/4g.png" /></div>
+                        <div class="covercontainer" onclick="coverOnclick(this)" data-selector="false"><img class="cover" src="作品封面/x.png" /></div>
+                        <div class="covercontainer" onclick="coverOnclick(this)" data-selector="false"><img class="cover" src="作品封面/xx.png" /></div>
+                        <div class="covercontainer" onclick="coverOnclick(this)" data-selector="false"><img class="cover" src="作品封面/世界.png" /></div>
+                        <div class="covercontainer" onclick="coverOnclick(this)" data-selector="false"><img class="cover" src="作品封面/冰原.png" /></div>
+                        <div class="covercontainer" onclick="coverOnclick(this)" data-selector="false"><img class="cover" src="作品封面/4k1.png" /></div>
+                        <div class="covercontainer" onclick="coverOnclick(this)" data-selector="false"><img class="cover" src="作品封面/g.png" /></div>
+                        <div class="covercontainer" onclick="coverOnclick(this)" data-selector="false"><img class="cover" src="作品封面/p.png" /></div>
+                        <div class="covercontainer" onclick="coverOnclick(this)" data-selector="false"><img class="cover" src="作品封面/2.png" /></div>
+                        <div class="covercontainer" onclick="coverOnclick(this)" data-selector="false"><img class="cover" src="作品封面/p2.png" /></div>
+                        <div class="covercontainer" onclick="coverOnclick(this)" data-selector="false"><img class="cover" src="作品封面/p2g.png" /></div>
+                        <div class="covercontainer" onclick="coverOnclick(this)" data-selector="false"><img class="cover" src="作品封面/3.png" /></div>
+                        <div class="covercontainer" onclick="coverOnclick(this)" data-selector="false"><img class="cover" src="作品封面/p3.png" /></div>
+                        <div class="covercontainer" onclick="coverOnclick(this)" data-selector="false"><img class="cover" src="作品封面/3g.png" /></div>
+                        <div class="covercontainer" onclick="coverOnclick(this)" data-selector="false"><img class="cover" src="作品封面/4.png" /></div>
+                        <div class="covercontainer" onclick="coverOnclick(this)" data-selector="false"><img class="cover" src="作品封面/4g.png" /></div>
+                        <div class="covercontainer" onclick="coverOnclick(this)" data-selector="false"><img class="cover" src="作品封面/x.png" /></div>
+                        <div class="covercontainer" onclick="coverOnclick(this)" data-selector="false"><img class="cover" src="作品封面/xx.png" /></div>
+                        <div class="covercontainer" onclick="coverOnclick(this)" data-selector="false"><img class="cover" src="作品封面/世界.png" /></div>
+                        <div class="covercontainer" onclick="coverOnclick(this)" data-selector="false"><img class="cover" src="作品封面/冰原.png" /></div>
+                    </div>               
+               </td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>

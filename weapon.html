@@ -1,0 +1,142 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <style>
+        
+
+        table {
+            width: 100%;
+            height: 700px;
+            border-collapse: collapse;
+        }
+
+        .top {
+            background-color: rgb(58, 139, 255);
+            color: white;
+            font-size: 40px;
+            text-align: center;
+        }
+        .retrun {
+            position: relative;
+            top: 5%;
+            right: 40%;
+            width: 40px;
+            height: 40px;
+        }
+        .img_return {
+            width: 40px;
+            height: 40px;
+        }
+            .img_return:hover {
+                opacity: 0.8;
+            }
+        .body {
+            
+            background-color: rgb(216,234,255);
+            text-align: center;
+            
+            align-items: center;
+        }
+        .weapon {
+            
+            display: inline-block;
+            width: 120px;
+            height: 160px;
+            background-color: aliceblue;
+            margin-right: 20px;
+            margin-bottom: 20px;
+            z-index: 0;
+            transition: transform 0.2s ease;
+        }
+            .weapon:hover {
+                transform: scale(2);
+                z-index:1;
+            }
+                .weapon:hover .weapon_information {
+                    display: block;
+                    transform: scale(0.5);
+                    position: relative;
+                    top: -40%;
+                    z-index: 1;
+                }
+                .weapon:hover .weapon_img {
+                    display: none;
+                    z-index: 1;
+                }
+                .weapon:hover .weapon_gif {
+                    display: block;
+                    transform: scale(0.7);
+                    position: relative;
+                    top: -15%;
+                    right: 8%;
+                    z-index: 1;
+                }
+        .weapon_img {
+            display: block;
+            margin-top: 10px;
+            margin-left: 10px;
+            width: 100px;
+            height: 140px;
+            z-index: 0;
+        }
+        .weapon_gif {
+            display: none;
+            margin-top: 10px;
+            margin-right: 100px;
+            width: 140px;
+            height: 140px;
+            z-index: 0;
+        }
+        .weapon_information {
+            display: none;
+            z-index: 0;
+        }
+    </style>
+    <script>
+        function showInformation(weapon) {
+
+        }
+    </script>
+</head>
+<body>
+    <table>
+        <thead>
+            <tr>
+                <td class="top" height="40" colspan="2"><a class="retrun" href="index.html"><img class="img_return" src="return.png" /></a>武器图鉴</td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="body" height="660" colspan="2">
+                    <div>
+                        <div class="weapon" onselect=""><img class="weapon_img" src="武器/斩斧.jpg" /><img class="weapon_gif" src="武器/斩斧.gif" /><div class="weapon_information">斩斧<br />变幻莫测，攻势如虎，斩尽一切不平</div></div>
+                        <div class="weapon"><img class="weapon_img" src="武器/片手剑.jpg" /><img class="weapon_gif" src="武器/片手剑.gif" /><div class="weapon_information">片手剑<br />攻防一体，后撤无敌，我要做山里灵活的狗！</div></div>
+                        <div class="weapon"><img class="weapon_img" src="武器/双刀.jpg" /><img class="weapon_gif" src="武器/双刀.gif" /><div class="weapon_information">双刀<br />迅猛攻击，搓澡带师，白刀子进，红刀子出</div></div>
+                        <div class="weapon"><img class="weapon_img" src="武器/虫棍.jpg" /><img class="weapon_gif" src="武器/虫棍.gif" /><div class="weapon_information">虫棍<br />纵横一跃，独览四方，我让你飞了吗？</div></div>
+                        <div class="weapon"><img class="weapon_img" src="武器/笛子.jpg" /><img class="weapon_gif" src="武器/笛子.gif" /><div class="weapon_information">狩猎笛<br />坟场蹦迪，奶妈担当，我这条命都是笛子给的</div></div>
+                        <div class="weapon"><img class="weapon_img" src="武器/轻弩.jpg" /><img class="weapon_gif" src="武器/轻弩.gif" /><div class="weapon_information">轻弩<br />灵活走位，精准打击，让子弹飞一会~</div></div>
+                        <div class="weapon"><img class="weapon_img" src="武器/长枪.jpg" /><img class="weapon_gif" src="武器/长枪.gif" /><div class="weapon_information">长枪<br />绝对防御，人车追击，我将带盾冲锋！</div></div>
+                    </div>
+                    <br />
+                    <br />
+                    <br />
+                    <br />                                        
+                    <br />
+                    <div>
+                        <div class="weapon"><img class="weapon_img" src="武器/大剑.jpg" /><img class="weapon_gif" src="武器/大剑.gif" /><div class="weapon_information">大剑<br />蓄力一击，撼天振地。打一刀，吃三年</div></div>
+                        <div class="weapon"><img class="weapon_img" src="武器/盾斧.jpg" /><img class="weapon_gif" src="武器/盾斧.gif" /><div class="weapon_information">盾斧<br />为解生，为解死，为解战斗一辈子！</div></div>
+                        <div class="weapon"><img class="weapon_img" src="武器/重弩.jpg" /><img class="weapon_gif" src="武器/重弩.gif" /><div class="weapon_information" style="top:-45%">重弩<br />火力压制，军事化狩猎。记住，一切恐惧来自火力不足</div></div>
+                        <div class="weapon"><img class="weapon_img" src="武器/锤子.jpg" /><img class="weapon_gif" src="武器/大锤.gif" /><div class="weapon_information">大锤<br />风车滚滚，强蓄一击。头都给你敲烂来</div></div>
+                        <div class="weapon"><img class="weapon_img" src="武器/铳枪.jpg" /><img class="weapon_gif" src="武器/铳枪.gif" /><div class="weapon_information" style="top:-45%">铳枪<br />无视肉质，火炮之下，众生平等。打炮才是男人的浪漫</div></div>
+                        <div class="weapon"><img class="weapon_img" src="武器/弓箭.jpg" /><img class="weapon_gif" src="武器/弓箭.gif" /><div class="weapon_information" style="top:-30%">弓箭<br />强矢之末，箭在弦上，不得不发</div></div>
+                        <div class="weapon"><img class="weapon_img" src="武器/太刀.jpg" /><img class="weapon_gif" src="武器/太刀.gif" /><div class="weapon_information" style="top:-30%">下头太刀虾!</div></div>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>

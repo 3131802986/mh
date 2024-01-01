@@ -1,0 +1,361 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <style>
+        table {
+            width: 100%;
+            height: 700px;
+            border-collapse: collapse;
+        }
+
+        .top {
+            background-color: rgb(58, 139, 255);
+            color: white;
+            font-size: 40px;
+            text-align: center;
+        }
+
+        .retrun {
+            position: relative;
+            top: 5%;
+            right: 35%;
+            width: 40px;
+            height: 40px;
+        }
+
+        .img_return {
+            width: 40px;
+            height: 40px;
+        }
+
+            .img_return:hover {
+                opacity: 0.8;
+            }
+
+        .body {
+            background-color: rgb(216,234,255);
+            text-align: center;
+            align-items: center;
+        }
+        .item_container{
+            position:absolute;
+            
+            width:120px;
+            height:200px;
+
+        }
+        .box{
+            position:absolute;
+            background-color:white;
+            width:100px;
+            height:100px;
+            top:0%;
+            right:0%;
+        }
+        .button {
+            position: absolute;
+            color:rgb(240 240 245);
+            background-color: rgb(58, 139, 255);
+            width: 85px;
+            height: 20px;
+            user-select: none;
+            top: 60%;
+            right: 6%;
+        }
+            .button:hover {
+                background-color: rgb(28, 109, 225);
+            }
+        .resetButton {
+            position: absolute;
+            color: rgb(240 240 245);
+            background-color: rgb(58, 139, 255);
+            width: 85px;
+            user-select: none;
+            right: 50%;
+            top: 80%;
+            height: 40px;
+            
+            display: none
+        }
+            .resetButton:hover {
+                background-color: rgb(28, 109, 225);
+            }
+        .resetButton_Text{
+            position:absolute;
+            text-align:center;
+            top:20%;
+            right:3%;
+            height:40px;
+            width:85px;
+        }
+        .name {
+            position: absolute;
+            
+            font-size: 15px;
+            width: 100px;
+            height: 20px;
+            text-align: center;
+            top:50%;
+            right:0%;
+        }
+        .box_title {
+            position: absolute;
+            
+            font-size: 15px;
+            width: 100px;
+            height: 20px;
+            text-align: center;
+            top:-10%;
+            right:3%;
+            
+            
+        }
+    </style>
+    <script>
+        const weapons = [{ name: "太刀", src: "武器/太刀.jpg" },
+            { name: "弓箭", src: "武器/弓箭.jpg" },
+            { name: "斩斧", src: "武器/斩斧.jpg" },
+            { name: "长枪", src: "武器/长枪.jpg" },
+            { name: "盾斧", src: "武器/盾斧.jpg" },
+            { name: "大剑", src: "武器/大剑.jpg" },
+            { name: "铳枪", src: "武器/铳枪.jpg" },
+            { name: "虫棍", src: "武器/虫棍.jpg" },
+            { name: "片手剑", src: "武器/片手剑.jpg" },
+            { name: "大锤", src: "武器/锤子.jpg" },
+            { name: "双刀", src: "武器/双刀.jpg" },
+            { name: "轻弩", src: "武器/轻弩.jpg" },
+            { name: "重弩", src: "武器/重弩.jpg" },
+        ];
+        const places = [{ name: "科科特村", src: "村子/科科特村.png" },
+        { name: "江波村", src: "村子/江波村.png" },
+        { name: "波凯村", src: "村子/波凯村.png" },
+        { name: "科科特村", src: "村子/科科特村.png" },
+        { name: "结云村", src: "村子/结云村.png" },
+        { name: "猎人旅团", src: "村子/猎人旅团.png" },
+        { name: "龙历院", src: "村子/龙历院.png" },
+        { name: "猎人旅团", src: "村子/猎人旅团.png" },
+        { name: "新大陆调查团", src: "村子/调查团.png" },
+        { name: "炎火村", src: "村子/炎火村.png" },
+        ];
+        
+        const monsters = [
+            { name: "雄火龙", src:"怪物图标/雄火龙.png" },
+            { name: "苍火龙", src:"怪物图标/苍火龙.png" },
+            { name: "爆锤龙", src:"怪物图标/爆锤龙.png" },
+            { name: "爆鳞龙", src:"怪物图标/爆鳞龙.png" },
+            { name: "贝希摩斯", src: "怪物图标/贝希摩斯.png" },
+            { name: "痹贼龙", src:"怪物图标/痹贼龙.png" },
+            { name: "惨爪龙", src:"怪物图标/惨爪龙.png" },
+            { name: "雌火龙", src:"怪物图标/雌火龙.png" },
+            { name: "毒妖鸟", src:"怪物图标/毒妖鸟.png" },
+            { name: "飞雷龙", src:"怪物图标/飞雷龙.png" },
+            { name: "黑角龙", src:"怪物图标/黑角龙.png" },
+            { name: "角龙", src:"怪物图标/角龙.png" },
+            { name: "冰咒龙", src:"怪物图标/冰咒龙.png" },
+            { name: "歼世灭尽龙", src:"怪物图标/歼世灭尽龙.png" },
+            { name: "黑狼鸟", src:"怪物图标/黑狼鸟.png" },
+            { name: "战痕黑狼鸟", src:"怪物图标/战痕黑狼鸟.png" },
+            { name: "雷狼龙", src:"怪物图标/雷狼龙.png" },
+            { name: "惶恐恐暴龙", src:"怪物图标/惶恐恐暴龙.png" },
+            { name: "斩龙", src:"怪物图标/斩龙.png" },
+            { name: "碎龙", src:"怪物图标/碎龙.png" },
+            { name: "冰牙龙", src:"怪物图标/冰牙龙.png" },
+            { name: "轰龙", src:"怪物图标/轰龙.png" },
+            { name: "黑轰龙", src:"怪物图标/黑轰龙.png" },
+            { name: "岩贼龙", src:"怪物图标/岩贼龙.png" },
+            { name: "炎妃龙", src:"怪物图标/炎妃龙.png" },
+            { name: "红莲爆鳞龙", src:"怪物图标/红莲爆鳞龙.png" },
+            { name: "金火龙", src:"怪物图标/金火龙.png" },
+            { name: "银火龙", src:"怪物图标/银火龙.png" },
+            { name: "樱火龙", src:"怪物图标/樱火龙.png" },
+            { name: "恐暴龙", src:"怪物图标/恐暴龙.png" },
+            { name: "千刃龙", src:"怪物图标/千刃龙.png" },
+            { name: "金狮子", src:"怪物图标/金狮子.png" },
+            { name: "电龙", src:"怪物图标/电龙.png" },
+            { name: "黑龙", src:"怪物图标/黑龙.png" },
+            { name: "煌黑龙", src:"怪物图标/煌黑龙.png" },
+            { name: "钢龙", src:"怪物图标/钢龙.png" },
+            { name: "灭尽龙", src:"怪物图标/灭尽龙.png" },
+            { name: "炎王龙", src:"怪物图标/炎王龙.png" },
+        ];
+        const fails = [
+            { name: "雄火龙", src: "怪物图标/雄火龙.png" },
+            { name: "苍火龙", src: "怪物图标/苍火龙.png" },
+            { name: "爆锤龙", src: "怪物图标/爆锤龙.png" },
+            { name: "爆鳞龙", src: "怪物图标/爆鳞龙.png" },
+            { name: "贝希摩斯", src: "怪物图标/贝希摩斯.png" },
+            { name: "痹贼龙", src: "怪物图标/痹贼龙.png" },
+            { name: "惨爪龙", src: "怪物图标/惨爪龙.png" },
+            { name: "雌火龙", src: "怪物图标/雌火龙.png" },
+            { name: "毒妖鸟", src: "怪物图标/毒妖鸟.png" },
+            { name: "飞雷龙", src: "怪物图标/飞雷龙.png" },
+            { name: "黑角龙", src: "怪物图标/黑角龙.png" },
+            { name: "角龙", src: "怪物图标/角龙.png" },
+            { name: "冰咒龙", src: "怪物图标/冰咒龙.png" },
+            { name: "歼世灭尽龙", src: "怪物图标/歼世灭尽龙.png" },
+            { name: "黑狼鸟", src: "怪物图标/黑狼鸟.png" },
+            { name: "战痕黑狼鸟", src: "怪物图标/战痕黑狼鸟.png" },
+            { name: "雷狼龙", src: "怪物图标/雷狼龙.png" },
+            { name: "惶恐恐暴龙", src: "怪物图标/惶恐恐暴龙.png" },
+            { name: "斩龙", src: "怪物图标/斩龙.png" },
+            { name: "碎龙", src: "怪物图标/碎龙.png" },
+            { name: "冰牙龙", src: "怪物图标/冰牙龙.png" },
+            { name: "轰龙", src: "怪物图标/轰龙.png" },
+            { name: "黑轰龙", src: "怪物图标/黑轰龙.png" },
+            { name: "岩贼龙", src: "怪物图标/岩贼龙.png" },
+            { name: "炎妃龙", src: "怪物图标/炎妃龙.png" },
+            { name: "红莲爆鳞龙", src: "怪物图标/红莲爆鳞龙.png" },
+            { name: "金火龙", src: "怪物图标/金火龙.png" },
+            { name: "银火龙", src: "怪物图标/银火龙.png" },
+            { name: "樱火龙", src: "怪物图标/樱火龙.png" },
+            { name: "恐暴龙", src: "怪物图标/恐暴龙.png" },
+            { name: "千刃龙", src: "怪物图标/千刃龙.png" },
+            { name: "金狮子", src: "怪物图标/金狮子.png" },
+            { name: "电龙", src: "怪物图标/电龙.png" },
+            { name: "黑龙", src: "怪物图标/黑龙.png" },
+            { name: "煌黑龙", src: "怪物图标/煌黑龙.png" },
+            { name: "钢龙", src: "怪物图标/钢龙.png" },
+            { name: "灭尽龙", src: "怪物图标/灭尽龙.png" },
+            { name: "炎王龙", src: "怪物图标/炎王龙.png" },
+        ];
+
+        const levels = [
+            { name: "村位", src: "等级/村位.png" },
+            { name: "下位", src: "等级/下位.png" },
+            { name: "上位", src: "等级/上位.png" },
+            { name: "G/大师位", src: "等级/大师位.png" },
+        ]
+
+        var compelteCount = 0;
+        function boxonClick(what,button) {
+            if (button.getAttribute("data-selected") === "true") {
+                button.setAttribute("data-selected", "done");
+                button.style.opacity = 0;
+                compelteCount++;
+                if (compelteCount >= 5) {
+                    var reset = document.getElementById("reset");
+                    reset.style.display = "block";
+                }
+                return;
+            }
+            else if (button.getAttribute("data-selected") === "false") {
+                if (what == weapons) {
+                    var image = document.getElementById("weapon");
+                    var name = document.getElementById("weapon_name");
+                    changeImage(image, weapons, button, name);
+                }
+                else if (what == places) {
+                    var image = document.getElementById("place");
+                    var name = document.getElementById("place_name");
+                    changeImage(image, places, button, name);
+                }
+                else if (what == monsters) {
+                    var image = document.getElementById("monster");
+                    var name = document.getElementById("monster_name");
+                    changeImage(image, monsters, button, name);
+                }
+                else if (what == levels) {
+                    var image = document.getElementById("level");
+                    var name = document.getElementById("level_name");
+                    changeImage(image, levels, button, name);
+                }
+                else if (what == fails) {
+                    var image = document.getElementById("fail");
+                    var name = document.getElementById("fail_name");
+                    changeImage(image, fails, button, name);
+                }
+                button.setAttribute("data-selected","true") ;
+                button.textContent = "停止";
+            }
+            
+
+        }
+
+        function changeImage(image, what, button,name) {
+            if (button.getAttribute("data-selected") === "done") {
+                return;
+            }
+            var max = what.length ;         
+            var radomInt =Math.floor( Math.random()*max);
+            image.src = what[radomInt].src;
+            name.textContent = what[radomInt].name;
+            setTimeout(function () {
+                changeImage(image, what,button,name);
+            }, 100); 
+        }
+
+        function reset(resetButton) {
+            var names = document.getElementsByClassName("name");
+            var images = document.getElementsByClassName("box");
+            var buttons = document.getElementsByClassName("button");
+            for (var i = 0; i < names.length; i++) {
+                names[i].textContent = "";
+            }
+            for (var i = 0; i < images.length; i++) {
+                images[i].src = "？.png";
+            }
+            for (var i = 0; i < buttons.length; i++) {
+                buttons[i].setAttribute("data-selected", "false");
+                buttons[i].style.opacity = 1;
+                buttons[i].textContent = "开始测试";
+            }
+            resetButton.style.display = "none";
+            compelteCount = 0;
+        }
+    </script>
+</head>
+<body>
+    <table>
+        <thead>
+            <tr>
+                <td class="top" height="40"><a class="retrun" href="index.html"><img class="img_return" src="return.png" /></a>测试你的怪猎生活</td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="body" height="660">
+
+                    <div class="item_container" style="top:25%;right:70%">
+                        <div class="box_title">你的本命武器</div>
+                        <img class="box" id="weapon" src="？.png" />
+                        <div class="name" id="weapon_name"></div>
+                        <div class="button" onclick="boxonClick(weapons,this)" data-selected="false">开始测试</div>
+                    </div>
+
+                    <div class="item_container" style="top:25%;right:50%">
+                        <div class="box_title">你驻守的地点</div>
+                        <img class="box" id="place" src="？.png" />
+                        <div class="name" id="place_name"></div>
+                        <div class="button" onclick="boxonClick(places,this)" data-selected="false">开始测试</div>
+                    </div>
+
+                    <div class="item_container" style="top:25%;right:30%">
+                        <div class="box_title">你的猎人等级</div>
+                        <img class="box" id="level" src="？.png" />
+                        <div class="name" id="level_name"></div>
+                        <div class="button" onclick="boxonClick(levels,this)" data-selected="false">开始测试</div>
+                    </div>
+
+                    <div class="item_container" style="top:55%;right:60%">
+                        <div class="box_title">你的一生之敌</div>
+                        <img class="box" id="monster" src="？.png" />
+                        <div class="name" id="monster_name"></div>
+                        <div class="button" onclick="boxonClick(monsters,this)" data-selected="false">开始测试</div>
+                    </div>
+
+                    <div class="item_container" style="top:55%;right:40%">
+                        <div class="box_title">你的最怕的怪物</div>
+                        <img class="box" id="fail" src="？.png" />
+                        <div class="name" id="fail_name"></div>
+                        <div class="button" onclick="boxonClick(fails,this)" data-selected="false">开始测试</div>
+                    </div>
+                    <div class="resetButton" style="" id="reset" onclick="reset(this)" ><div class="resetButton_Text">重新测试</div> </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>

@@ -1,0 +1,460 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <style>
+        a {
+            text-decoration: none;
+        }
+        .body{
+            background-color:rgb(10,10,15);
+        }
+        .storyfont{
+            display:inline-block;
+            color:rgb(230,230,232);
+            font-size:40px;
+            animation:fontflow 1s forwards;
+            user-select:none;
+        }
+        @keyframes fontflow{
+            from{
+                opacity:0;
+            }
+            to{
+                opacity:0.8;
+            }
+        }
+        .storyImg{
+            position:absolute;
+            top:1%;
+            width:100%;
+            height:100%;
+            opacity:0.3;
+        }
+        .noteBk {
+            display:none;
+            position: absolute;
+            top: 1%;
+            width: 60%;
+            height: 100%;
+            opacity: 1;
+            background-color: rgb(194, 178, 130);
+            font-size:30px;
+            z-index:9;
+            margin-left:20%;
+        }
+        .video {
+            display:none;
+            position: absolute;
+            top: 1%;
+            width: 100%;
+            height: 100%;
+            opacity: 0.3;
+            user-select:none;
+        }
+        .storyImg_anmation{
+            animation:bkflow 2s forwards;
+        }
+        @keyframes bkflow{
+            from{
+                opacity:0;
+            }
+            to{
+              opacity:0.3;
+            }
+        }
+                       
+        .storyTextContainer{
+            position:absolute;           
+            width:40%;
+            height:50%;
+            top:10%;
+            left:8%;
+        }
+        .fontButton {
+            position: absolute;
+            width: 200px;
+            height: 50px;
+            font-size:30px;
+            color: rgb(230,230,232);
+            animation: fontflow 1s forwards;
+            top:80%;
+            left:40%;
+            user-select:none;
+        }
+        .fontButton:hover{
+            color:rgb(225, 71, 71);
+        }
+        .bgm{
+            color:rgb(0, 0, 5);
+        }
+    </style>
+    <script>
+        /* #号代表换号 */
+        const text1 = "这是一个古老的童谣";
+        const text2 = "当群鸟b恐b慌地飞向天空#";
+        const text3 = "当r飞r龙不再落地#";
+        const text4 = "世界都将被浸染成r红r色";
+        const text5 = "r巨r大r的r龙因为b恐b惧而不断前进#";
+        const text6 = "生命，财富，所有的一切都将显得那么r微r不r足r道#";      
+        const text7 = "覆灭修雷德王国的末日使者来临#我们唯一能做的就是朗诵它那禁忌的名#";
+        const text8 = "命运的纷争#";
+        const text9 = "b米b拉b波b雷b亚b斯";
+
+        var hasCompeletedLoadText = false;
+
+        function loadText(text, i, needclear) {
+            var stc = document.getElementById("stc");
+            if (i == 0) {              
+                hasCompeletedLoadText = false;
+                if (needclear) {
+                    stc.innerHTML = "";
+                }
+            }
+            if (i >= text.length) {
+                hasCompeletedLoadText = true;
+                return;
+            }
+            if (text[i] == '#') {
+                var newFont = document.createElement("br");
+                stc.appendChild(newFont);
+                setTimeout(function () {
+                    loadText(text, i + 1, needclear);
+                }, 200);
+            }         
+            else if (text[i]=='r') {
+                var newFont = document.createElement("div");
+                newFont.className = "storyfont";
+                newFont.textContent = text[i+1];
+                newFont.style.color = "rgb(110, 29, 29)";
+                stc.appendChild(newFont);
+                setTimeout(function () {
+                    loadText(text, i + 2, needclear);
+                }, 200);
+            } 
+            else if (text[i] == 'b') {
+                var newFont = document.createElement("div");
+                newFont.className = "storyfont";
+                newFont.textContent = text[i + 1];
+                newFont.style.color = "rgb(0, 0, 5)";
+                stc.appendChild(newFont);
+                setTimeout(function () {
+                    loadText(text, i + 2, needclear);
+                }, 200);
+            }  
+            else {
+                var newFont = document.createElement("div");
+                newFont.className = "storyfont";
+                newFont.textContent = text[i];
+                stc.appendChild(newFont);
+                setTimeout(function () {
+                    loadText(text, i + 1, needclear);
+                }, 200);
+            }
+        }
+
+        function loadButton(button) {
+            if (hasCompeletedLoadText) {
+                var body = document.getElementById("body");               
+                body.appendChild(button);
+            }
+            else {
+                setTimeout(function () {
+                    loadButton(button);
+                }, 100);
+            }
+                
+        }
+
+        function startRoad() {
+            var bgm = document.getElementById("bgm");
+            bgm.volume = 0.1;
+            bgm.loop = true;
+            bgm.play();
+            loadText(text2, 0, true);
+            text2End();
+            var sound = document.getElementById("sound");
+            sound.src = "音效/翻页.mp3";
+            sound.volume = 0.4;
+            sound.play();
+            var start = document.getElementById("start");
+            start.remove();
+            var end = document.getElementById("end");
+            end.remove();
+            var bk = document.getElementById("bk");
+            bk.classList.remove("storyImg_anmation");
+            void bk.offsetWidth;
+            bk.src = "故事图片/飞鸟.png";
+            bk.classList.add("storyImg_anmation");
+        }
+
+        function text2End() {
+            if (hasCompeletedLoadText) {
+                var sound = document.getElementById("sound");            
+                sound.src = "音效/鸟飞.mp3";
+                sound.volume = 0.5;
+                sound.play();
+                setTimeout(function () {
+                    loadText(text3, 0, false);
+                    var bk = document.getElementById("bk");
+                    bk.classList.remove("storyImg_anmation");
+                    void bk.offsetWidth;
+                    bk.src = "故事图片/飞龙.png";
+                    bk.classList.add("storyImg_anmation");
+                    text3End();
+                }, 1000);               
+            }
+            else {
+                setTimeout(function () {
+                    text2End();
+                }, 500);
+            }
+        }
+
+        function text3End() {
+            if (hasCompeletedLoadText) {
+                var sound = document.getElementById("sound");
+                sound.src = "音效/龙叫.mp3";
+                sound.volume = 0.1;
+                sound.play();
+                setTimeout(function () {
+                    loadText(text4, 0, false);
+                    text4End();
+                }, 800);
+                
+            }
+            else {
+                setTimeout(function () {
+                    text3End();
+                }, 500);
+            }
+        }
+
+        function text4End() {
+            if (hasCompeletedLoadText) {
+                var button = document.createElement("div");
+                button.className = "fontButton";
+                button.textContent = "继续";
+                button.onclick = countinue;
+                button.id = "countinue";
+                loadButton(button);
+            }
+            else {
+                setTimeout(function () {
+                    text4End();
+                }, 500);
+            }
+        }
+
+        function countinue() {
+            var sound2 = document.getElementById("sound");
+            sound2.src = "音效/翻页.mp3";
+            sound2.volume = 0.4;
+            sound2.play();       
+            var bk = document.getElementById("bk");
+            bk.src = "故事图片/老山龙.png";
+            bk.classList.remove("storyImg_anmation");
+            void bk.offsetWidth;
+            bk.classList.add("storyImg_anmation");
+            var button = document.getElementById("countinue");
+            var sound = document.getElementById("sound2");
+            sound.src = "音效/踏地.mp3";
+            sound.volume = 0.8;           
+            sound.play();
+            loadText(text5, 0, true);
+            text5End();
+            button.remove();
+            
+        }
+
+        function text5End() {
+            if (hasCompeletedLoadText) {
+                setTimeout(function () {
+                    loadText(text6, 0, false);
+                    text6End();
+                },500);
+            }
+            else {
+                setTimeout(function () {
+                    text5End();
+                }, 500);
+            }
+        }
+        function text6End() {
+            if (hasCompeletedLoadText) { 
+                var button = document.createElement("div");
+                button.className = "fontButton";
+                button.textContent = "继续";
+                button.onclick = countinue2;
+                button.id = "countinue";
+                loadButton(button);
+               
+            }
+            else {
+                setTimeout(function () {
+                    text6End();
+                }, 500);
+            }
+        }
+        function countinue2() {
+            var sound = document.getElementById("sound");
+            sound.src = "音效/翻页.mp3";
+            sound.volume = 0.4;
+            sound.play();
+            
+            var bk = document.getElementById("bk");
+            bk.src = "故事图片/mh.png";
+            bk.classList.remove("storyImg_anmation");
+            void bk.offsetWidth;
+            bk.classList.add("storyImg_anmation");
+            loadText(text7, 0, true);
+            text7End();
+            var button = document.getElementById("countinue");
+            button.remove();
+        }
+        function text7End() {
+            if (hasCompeletedLoadText) {              
+                var button = document.createElement("div");
+                button.className = "fontButton";
+                button.textContent = "继续";
+                button.onclick = countinue3;
+                button.id = "countinue";
+                loadButton(button);
+            }
+            else {
+                setTimeout(function () {
+                    text7End();
+                }, 500);
+            }
+        }
+        function countinue3() {
+            var sound = document.getElementById("sound");
+            sound.src = "音效/翻页.mp3";
+            sound.volume = 0.4;
+            sound.play();
+            
+            var bk = document.getElementById("bk");
+            bk.src = "故事图片/mh.png";
+            bk.classList.remove("storyImg_anmation");
+            void bk.offsetWidth;
+            bk.classList.add("storyImg_anmation");
+            loadText(text8, 0, true);
+            text8End();
+            var button = document.getElementById("countinue");
+            button.remove();
+        }
+        function text8End() {
+            if (hasCompeletedLoadText) {
+                setTimeout(function () {
+                    var vedio = document.getElementById("video");
+                    vedio.style.display = "block";
+                    vedio.classList.add("storyImg_anmation");
+                    var bk = document.getElementById("bk");
+                    bk.style.display = "none";
+                    //var bk = document.getElementById("bk");
+                    //bk.src = "故事图片/黑龙.png";
+                    //bk.classList.remove("storyImg_anmation");
+                    //void bk.offsetWidth;
+                    //bk.classList.add("storyImg_anmation");
+                    loadText(text9, 0, false);
+                    text9End();
+                }, 500);
+            }
+            else {
+                setTimeout(function () {
+                    text8End();
+                }, 500);
+            }
+        }
+
+        function text9End() {
+            var bgm = document.getElementById("bgm");
+            bgm.pause();
+            if (hasCompeletedLoadText) {
+                setTimeout(function () {
+                    var vedio = document.getElementById("video");
+                    vedio.play();
+                    vedio.addEventListener("ended", function () {
+                        var button = document.createElement("div");
+                        button.className = "fontButton";
+                        button.textContent = "阅读被遗忘的笔记";
+                        button.onclick = readNote;
+                        button.style.top = "79.3%";
+                        button.style.left = "30%";
+                        button.style.width = "300px";
+                        button.id = "start";
+                        loadButton(button);
+                        var end = document.createElement("a"); 
+                        end.className = "fontButton";
+                        end.textContent = "返回首页";
+                        end.href = "index.html";
+                        end.id = "end";
+                        end.style.left = "50%";
+                        loadButton(end);
+                    })                   
+                },1500)                                                       
+            }
+            else {
+                setTimeout(function () {
+                    text9End();
+                }, 500);
+            }
+        }
+        function readNote() {
+            var sound = document.getElementById("sound");
+            sound.src = "音效/翻页.mp3";
+            sound.volume = 0.4;
+            sound.play();
+            var note = document.getElementById("note");
+            note.style.display = "block";
+
+        }
+        function noteClick(note) {
+            var sound = document.getElementById("sound");
+            sound.src = "音效/翻页.mp3";
+            sound.volume = 0.4;
+            sound.play();
+            note.style.display = "none";
+        }
+        window.onload = function () {           
+            loadText(text1, 0,true);        
+            var button = document.createElement("div");
+            button.className = "fontButton";
+            button.textContent = "开始阅读";
+            button.onclick = startRoad;
+            button.id = "start";
+            loadButton(button);
+
+            var end = document.createElement("a");
+            end.className = "fontButton";
+            end.textContent = "返回首页";
+            end.href = "index.html";
+            end.id = "end";
+            end.style.left = "50%";
+            loadButton(end);
+        }
+    </script>
+</head>
+<body>
+    <table width="100%">
+        <tr>
+            <td class="body" width="100%" height="720px" id="body">
+                <audio id="sound2"></audio>
+                <audio id="sound"></audio>
+                <audio class="bgm" id="bgm" src="故事背景音乐/心火.mp3"></audio>
+                <img class="storyImg storyImg_anmation" src="故事图片/mh.png" id="bk" />
+                <video class="video" id="video" src="故事图片/黑龙.mp4"></video>
+                <div class="noteBk" onclick="noteClick(this)" id="note">
+                    <br /><br /><br />根本就不存在什么黑龙，这世界怎么可能有能够毁灭国家的生物<br />
+                    只是现在的统治者们为了掩盖当时他们叛乱的事实而编造的谎言罢了<br />
+                    我现在就去那禁忌的修雷德王城，证明黑龙是不存在的
+                </div>
+                <div class="storyTextContainer" id="stc">
+                </div>
+            </td>
+        </tr>
+    </table>
+</body>
+</html>

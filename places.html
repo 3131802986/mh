@@ -1,0 +1,282 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <style>
+        
+
+        .table {
+            width: 100%;
+            height: 700px;
+            border-collapse: collapse;
+        }
+
+        .top {
+            background-color: rgb(58, 139, 255);
+            color: white;
+            font-size: 40px;
+            text-align: center;
+        }
+        
+        .left {
+        }
+
+        .body {
+            background-color: rgb(20,20,25);
+        }
+
+        .retrun {
+            position: relative;
+            top: 5%;
+            right: 40%;
+            width: 40px;
+            height: 40px;
+        }
+
+        .content-container {
+            display: flex;
+            text-align: center;
+        }
+
+        .img_return {
+            width: 40px;
+            height: 40px;
+        }
+
+            .img_return:hover {
+                opacity: 0.8;
+            }
+        .map_image{
+            width:100%;
+            height:680px;
+            
+        }
+
+        .map_image_anmation{
+            animation:flow 3s forwards;
+        }
+
+        .map_information_container {
+            display: block;
+            position: absolute;
+            width: 210px;
+            height: 200px;
+            top: 30%;
+            right: 75%;
+            
+        }
+
+        
+
+        .map_name {
+            position: absolute;
+            color: aliceblue;
+            font-size: 30px;
+            top:-5%;
+
+        }
+
+        .map_text{
+            position:absolute;
+            color:aliceblue;                      
+            font-size:25px;
+            top:15%;
+        }
+
+
+        .map_information_container_anmation {
+            animation: flow 3s forwards,up 1s forwards;
+            
+        }
+
+        .forward{
+            position:absolute;
+            
+            width:100px;
+            height:200px;
+            top:40%;
+            right:1%;
+            opacity:0;
+        }
+
+        .hidden {
+            animation: hidden 1s forwards;
+            animation-fill-mode: forwards;
+        }
+
+        .forward:hover{
+            opacity:0.6;
+        }
+         
+        .back {
+            position: absolute;         
+            width: 100px;
+            height: 200px;
+            top: 40%;
+            right: 92%;
+            opacity:0;
+            
+        }
+
+        .back:hover{
+            opacity:0.4;
+        }
+
+        .radio{
+            position:absolute;
+            width:30px;
+            top:95%;
+            
+        }
+
+        @keyframes flow{
+            from{
+                opacity:0.3;
+            }
+            to
+            {
+                opacity:1;
+            }
+        }
+
+        @keyframes hidden{
+            from{
+                opacity:0.6;
+            }
+            to{
+                opacity:0;
+            }
+        }
+
+        @keyframes up{
+            from{
+                top:40%;
+            }
+            to
+            {
+                top:30%;
+               
+            }
+        }
+        
+    </style>
+    <script>
+        var maps = [
+            {
+                name: "古代树森林",
+                information: "风景宜人，四通八达，住树之顶层，享顶尖人生",
+                namecolor: "rgb(67,244,13)"
+            },
+            {
+                name: "大冢蚁荒地",
+                information: "邻居热情好客，阳光洒遍大地，特色美食应有尽有",
+                namecolor: "rgb(223, 213, 84)"
+            },
+            {
+                name: "陆珊瑚台地", information: "环境优美，文艺的气息遍足四方，更有“幻兽”出没",
+                namecolor: "rgb(212, 118, 183)"
+            },
+            {
+                name: "瘴气之谷", information: "独特气息，“飙车”圣地，有胆你就来",
+                namecolor: "rgb(181, 178, 26)"
+            },
+            {
+                name: "龙结晶之地", information: "尖端小区，与成功人士为邻，走向辉煌人生",
+                namecolor: "rgb(33, 112, 225)"
+            },
+
+        ];
+        var currentNumber = 0;
+        function skipMap(number) {
+           
+            var mapImg = document.getElementById("map_img");
+            var mapText = document.getElementById("map_text");
+            var mapName = document.getElementById("map_name");
+            var mapInformationCotanier = document.getElementById("map_Text_conatiner");
+            var forwoard = document.getElementById("forward");
+            var back = document.getElementById("back");
+            mapImg.src = "地图/" + maps[number].name + ".png";
+            mapText.textContent = maps[number].information;
+            mapName.textContent = maps[number].name;
+            mapName.style.color = maps[number].namecolor;
+            mapImg.classList.remove("map_image_anmation");
+            void mapImg.offsetWidth;
+            mapImg.classList.add("map_image_anmation");
+           
+            mapInformationCotanier.classList.remove("map_information_container_anmation");
+            void mapInformationCotanier.offsetWidth;
+            mapInformationCotanier.classList.add("map_information_container_anmation");
+
+            forwoard.classList.remove("hidden");
+            void forwoard.offsetWidth;
+            forwoard.classList.add("hidden");
+            forwoard.addEventListener("animationend", function(){ forwoard.classList.remove("hidden")})
+            back.classList.remove("hidden");
+            void back.offsetWidth;
+            back.classList.add("hidden");
+            back.addEventListener("animationend",function (){ back.classList.remove("hidden") })
+        }
+
+        function radioOnclick(number){
+            var count = maps.length;
+            var radios = document.getElementsByClassName("radio");
+            for (var i = 0; i < radios.length; i++) {
+                if (number != parseInt(radios[i].id)) {
+                    radios[i].checked = false;
+                }
+                else {
+                    radios[i].checked = true;
+                }
+            }
+            currentNumber = number;
+            skipMap(currentNumber);
+        }
+        function nextMap() {
+            currentNumber = (currentNumber + 1) % maps.length;
+            radioOnclick(currentNumber);
+            
+        }
+        function backMap() {
+            currentNumber -= 1;
+            if (currentNumber <0) {
+                currentNumber = maps.length - 1;
+            }
+            radioOnclick(currentNumber);
+            
+        }
+        window.onload = function () {
+            currentNumber = 0
+            radioOnclick(0);
+        }
+    </script>
+</head>
+<body>
+    <table class="table">
+        <thead>
+            <tr>
+                <td class="top" height="40"><a class="retrun" href="index.html"><img class="img_return" src="return.png" /></a>自然风光</td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="body" height="660px">
+                    <img class="map_image " id="map_img" src="地图/古代树.png" />
+                    <div class="map_information_container" id="map_Text_conatiner">
+                        <div class="map_name" id="map_name"></div>
+                        <div class="map_text " id="map_text"></div>
+                    </div>
+                    <img class="forward" onclick="nextMap()" src="地图/next.png" id="forward"/>
+                    <img class="back" onclick="backMap()" src="地图/back.png" id="back"/>
+                    <input class="radio" type="radio" id="0" style="right:54%" onclick="radioOnclick(0)" />
+                    <input class="radio" type="radio" id="1" style="right:52%" onclick="radioOnclick(1)"/>
+                    <input class="radio" type="radio" id="2" style="right:50%" onclick="radioOnclick(2)"/>
+                    <input class="radio" type="radio" id="3" style="right:48%" onclick="radioOnclick(3)"/>
+                    <input class="radio" type="radio" id="4" style="right:46%" onclick="radioOnclick(4)"/>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>
