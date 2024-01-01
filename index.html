@@ -1,0 +1,159 @@
+﻿<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>怪物猎人</title>
+    <style>
+        table {
+            width:100%;
+            height:650px;
+            border-collapse: collapse;
+        }
+
+        .top {
+            background-color: rgb(58, 139, 255);
+            color: white;
+            
+            text-align: center;       
+        }
+
+        .left_box {
+            display: flex; /* 使用弹性盒子布局 */
+            align-items: center; /* 垂直居中 */
+            justify-content: center; /* 水平居中 */
+            width: 200px;
+            background-color: rgb(77, 88, 181);
+            overflow-y: auto;
+            text-align: center;
+            flex-wrap: wrap; /* 添加这一行代码 */
+        }
+
+        .left_option {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 40px;
+            width: 90%;
+            background-color: rgb(91, 104, 214);
+            color: white;
+            text-align: center;
+            margin: 10px auto;
+            user-select:none;
+            
+        }
+            .left_option:hover {
+                background-color: rgb(79, 90, 185);
+            }
+
+        .main_background {
+            width: 100%;
+            height: 550px;                            
+            position:relative;
+            z-index:0;
+        }
+
+        .backgroundImg{
+            position:relative;
+            width:100%;
+            height:600px;
+            opacity:0.5;
+            top:-5%;
+        }
+
+        .overlay-image {
+            position: relative;
+            width: 300px;
+            height: 400px;
+            top: -114%;
+            right: -100%;
+            transform: translateX(-100%);
+            opacity:0;
+            animation:flow 2s forwards;
+            z-index: 1;
+        }
+       
+        .text {
+            position: relative;
+            top: -200%;
+            right: 0;
+            font-size: 40px;
+            color: black;
+            opacity: 0;
+            color:aliceblue;
+            transition: opacity 1s ease-in-out;
+            animation:moveup 1s forwards;
+        }
+        .text.show {
+            opacity: 1;
+        }
+        .audioCotral{
+            position:relative;
+            top:-50%;
+            right:-30%;
+            height:40px;
+        }
+        a{
+            text-decoration:none;
+        }
+        @keyframes moveup{
+            from{
+                top:-160%;
+            }
+            to{
+                top:-185%;
+            }
+        }
+        @keyframes flow{
+            from{
+                opacity:0.5;
+            }
+            to{
+                opacity:1;
+            }
+        }
+        
+    </style>
+    <script>
+       
+        function load() {
+            var i = 0;
+            var audio = document.getElementsByClassName("audioCotral")[0];
+            audio.volume = 0.1;
+            var elements = document.getElementsByClassName('text');
+            while (elements[i] != null) {
+                elements[i].classList.add('show');
+                i++;
+            }        
+        }
+    </script>
+</head>
+<body onload="load()">
+    <table>
+        <tr>
+            <td colspan="2" class="top " height="50"  ><h1 >怪物猎人</h1><audio src="音乐/英雄之证.mp3"  class="audioCotral"  controls></audio></td>
+        </tr>
+        <tr>
+            <td class="left_box" height="600" width="10%">
+                <a class="left_option" href="introduce.html">游戏介绍</a>
+                <a class="left_option" href="weapon.html">武器图鉴</a>
+                <a class="left_option" href="monster.html">怪物图鉴</a>
+                <a class="left_option" href="works.html">历代作品</a>
+                <a class="left_option" href="places.html">自然风光</a>
+                <a class="left_option" href="test.html">猎人测试</a>
+                <a class="left_option" href="music.html">音乐鉴赏</a>
+                <a class="left_option" href="story.html">古老传说</a>
+                <a class="left_option" href="end.html">结束语</a>
+            </td>
+            <td width="90%" height="600">
+                <div class="main_background">
+                    <img src="bk.png" class="backgroundImg" />
+                    <img src="monsterindex.jpg" class="overlay-image" name="overlay-image" />
+                    <div class="text" name="text">不玩怪物猎人的人生注定是失败的人生</div>
+                    <br />
+                    <div class="text" name="text">给我去玩怪猎</div>
+                </div>              
+            </td>
+        </tr>
+    </table>
+</body>
+</html>
